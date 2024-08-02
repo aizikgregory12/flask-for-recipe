@@ -21,5 +21,6 @@ def generate_qr():
     return send_file(buffer, mimetype='image/png', as_attachment=True, download_name='qr_code.png')
 
 if __name__ == '__main__':
+    from waitress import serve
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    serve(app, host='0.0.0.0', port=port)
