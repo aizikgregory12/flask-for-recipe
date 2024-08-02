@@ -5,7 +5,7 @@ import io
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://aizikgregory12.github.io"}})
 
 @app.route('/api/generate_qr', methods=['POST'])
 def generate_qr():
@@ -21,6 +21,5 @@ def generate_qr():
     return send_file(buffer, mimetype='image/png', as_attachment=True, download_name='qr_code.png')
 
 if __name__ == '__main__':
-    from waitress import serve
     port = int(os.environ.get("PORT", 5000))
-    serve(app, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
